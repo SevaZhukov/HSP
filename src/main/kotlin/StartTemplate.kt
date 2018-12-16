@@ -1,15 +1,13 @@
-package template
-
 import java.util.*
 
-sealed class StartTemplate(val sceneName: String) {
+sealed class StartTemplate {
 
     abstract val name: String
     abstract val templateFileName: String
 
     abstract fun getProperties(templateProperties: Properties): Properties?
 
-    class RoomModule(name: String) : StartTemplate(name) {
+    class RoomModule : StartTemplate() {
         override fun getProperties(templateProperties: Properties): Properties? {
             return templateProperties
         }
@@ -17,7 +15,7 @@ sealed class StartTemplate(val sceneName: String) {
         override val templateFileName: String = "RoomModule"
     }
 
-    class RetrofitModule(name: String) : StartTemplate(name) {
+    class RetrofitModule : StartTemplate() {
         override fun getProperties(templateProperties: Properties): Properties? {
             return templateProperties
         }
@@ -25,7 +23,7 @@ sealed class StartTemplate(val sceneName: String) {
         override val templateFileName: String = "RetrofitModule"
     }
 
-    class AppModule(name: String) : StartTemplate(name) {
+    class AppModule : StartTemplate() {
         override fun getProperties(templateProperties: Properties): Properties? {
             return templateProperties
         }
@@ -33,7 +31,7 @@ sealed class StartTemplate(val sceneName: String) {
         override val templateFileName: String = "AppModule"
     }
 
-    class SharedPreferencesModule(name: String) : StartTemplate(name) {
+    class SharedPreferencesModule : StartTemplate() {
         override fun getProperties(templateProperties: Properties): Properties? {
             return templateProperties
         }

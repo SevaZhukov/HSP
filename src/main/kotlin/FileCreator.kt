@@ -1,14 +1,13 @@
-package template
-
 import com.intellij.ide.fileTemplates.FileTemplateManager
 import com.intellij.ide.fileTemplates.FileTemplateUtil
 import com.intellij.openapi.project.Project
 import com.intellij.psi.PsiDirectory
 
 class FileCreator(private val project: Project) {
-    fun createFile(name: String, directory: PsiDirectory) {
+    fun createFile(directory: PsiDirectory) {
         StartType.values().forEach { sceneType ->
-            val template = sceneType.getTemplate(name)
+            println("foreach ${sceneType.name}")
+            val template = sceneType.getTemplate()
             createTemplateFile(template, directory)
         }
     }
@@ -22,6 +21,5 @@ class FileCreator(private val project: Project) {
             startTemplate.getProperties(templateProperties),
             destinationDirectory
         )
-        println("created")
     }
 }

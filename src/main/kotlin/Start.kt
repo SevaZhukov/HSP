@@ -6,7 +6,6 @@ import com.intellij.openapi.actionSystem.LangDataKeys
 import com.intellij.openapi.command.WriteCommandAction
 import com.intellij.openapi.vfs.VirtualFile
 import com.intellij.psi.PsiDirectory
-import template.FileCreator
 
 import javax.swing.JPanel
 
@@ -14,11 +13,11 @@ class Start : AnAction() {
 
     lateinit var panel: JPanel
 
-    lateinit var destinationPath: PsiDirectory
     lateinit var classFileCreator: FileCreator
+    lateinit var event: AnActionEvent
 
     override fun actionPerformed(event: AnActionEvent) {
-        destinationPath = event.getData(LangDataKeys.PSI_ELEMENT)!! as PsiDirectory
+        this.event = event
         val project = event.project!!
         classFileCreator = FileCreator(project)
         val file = DataKeys.VIRTUAL_FILE.getData(event.dataContext) ?: return
@@ -52,40 +51,18 @@ class Start : AnAction() {
 
     private fun createCoreDICoreScope(folder: VirtualFile) {
         //TODO create scopes here
+        folder.createChildDirectory(folder, "scope")
     }
 
     private fun createCoreDICoreModule(folder: VirtualFile) {
-        //TODO create modules here
-        val module = folder.createChildDirectory(folder, "module")
+        folder.createChildDirectory(folder, "module")
+        val destinationPath = event.getData(LangDataKeys.PSI_ELEMENT) as PsiDirectory
         val classDirectory = destinationPath
             .findSubdirectory("core")!!
             .findSubdirectory("di")!!
             .findSubdirectory("core")!!
             .findSubdirectory("module")!!
-        createCoreDICoreModuleRoom(module, classDirectory)
-        createCoreDICoreModuleRetrofit(module, classDirectory)
-        createCoreDICoreModuleApp(module, classDirectory)
-        createCoreDICoreModuleSharedPreferences(module, classDirectory)
-    }
-
-    private fun createCoreDICoreModuleRoom(folder: VirtualFile, classDirectory: PsiDirectory) {
-        val className = "RoomModule"
-        classFileCreator.createFile(className, classDirectory)
-    }
-
-    private fun createCoreDICoreModuleRetrofit(folder: VirtualFile, classDirectory: PsiDirectory) {
-        val className = "RetrofitModule"
-        classFileCreator.createFile(className, classDirectory)
-    }
-
-    private fun createCoreDICoreModuleApp(folder: VirtualFile, classDirectory: PsiDirectory) {
-        val className = "AppModule"
-        classFileCreator.createFile(className, classDirectory)
-    }
-
-    private fun createCoreDICoreModuleSharedPreferences(folder: VirtualFile, classDirectory: PsiDirectory) {
-        val className = "SharedPreferencesModule"
-        classFileCreator.createFile(className, classDirectory)
+        classFileCreator.createFile(classDirectory)
     }
 
     private fun createCoreDIHelper(folder: VirtualFile) {
