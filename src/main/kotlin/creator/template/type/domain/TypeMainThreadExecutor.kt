@@ -2,11 +2,11 @@ package creator.template.type.domain
 
 import creator.template.Template
 
-enum class BaseCallback {
+enum class TypeMainThreadExecutor {
 
-    BASE_CALLBACK {
+    MAIN_THREAD_EXECUTOR {
         override fun getTemplate(): Template =
-            Template.App("BaseCallback")
+            Template.MainThreadExecutor("MainThreadExecutor")
     };
 
     abstract fun getTemplate(): Template

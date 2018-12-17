@@ -18,4 +18,6 @@ sealed class Template(val name: String) {
     class DaggerComponentHelper(name: String) : Template(name)
     class App(name: String) : Template(name)
     class BaseCallback(name: String) : Template(name)
+    class MainThreadExecutor(name: String) : Template(name)
+    class AppDatabase(name: String) : Template(name)
 }

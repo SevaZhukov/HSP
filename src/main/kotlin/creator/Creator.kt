@@ -6,10 +6,13 @@ import com.intellij.openapi.project.Project
 import com.intellij.psi.PsiDirectory
 import creator.template.Template
 import creator.template.type.*
+import creator.template.type.data.TypeAppDatabase
 import creator.template.type.di.TypeDICoreAppComponent
 import creator.template.type.di.TypeDICoreHelper
 import creator.template.type.di.TypeDICoreModule
 import creator.template.type.di.TypeDICoreScope
+import creator.template.type.domain.TypeBaseCallback
+import creator.template.type.domain.TypeMainThreadExecutor
 
 class Creator(private val project: Project) {
 
@@ -39,6 +42,24 @@ class Creator(private val project: Project) {
 
     fun createApp(directory: PsiDirectory) {
         TypeApp.values().forEach { type ->
+            createTemplateFile(type.getTemplate(), directory)
+        }
+    }
+
+    fun createBaseCallback(directory: PsiDirectory) {
+        TypeBaseCallback.values().forEach { type ->
+            createTemplateFile(type.getTemplate(), directory)
+        }
+    }
+
+    fun createMainThreadExecutor(directory: PsiDirectory) {
+        TypeMainThreadExecutor.values().forEach { type ->
+            createTemplateFile(type.getTemplate(), directory)
+        }
+    }
+
+    fun createAppDatabase(directory: PsiDirectory) {
+        TypeAppDatabase.values().forEach { type ->
             createTemplateFile(type.getTemplate(), directory)
         }
     }
