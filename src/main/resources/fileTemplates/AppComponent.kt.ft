@@ -1,0 +1,14 @@
+package ${PACKAGE_NAME}
+
+import core.di.core.module.RoomModule
+import core.di.core.module.AppModule
+import core.di.core.module.RetrofitModule
+import core.di.core.module.SharedPreferencesModule
+import dagger.Component
+import javax.inject.Singleton
+
+@Singleton
+@Component(modules = [AppModule::class, RetrofitModule::class, SharedPreferencesModule::class, RoomModule::class])
+interface AppComponent {
+
+}

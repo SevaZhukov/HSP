@@ -12,4 +12,10 @@ sealed class Template(val name: String) {
     class RetrofitModule(name: String) : Template(name)
     class AppModule(name: String) : Template(name)
     class SharedPreferencesModule(name: String) : Template(name)
+    class AppComponent(name: String) : Template(name)
+    class FragmentScope(name: String) : Template(name)
+    class FlowFragmentScope(name: String) : Template(name)
+    class DaggerComponentHelper(name: String) : Template(name)
+    class App(name: String) : Template(name)
+    class BaseCallback(name: String) : Template(name)
 }

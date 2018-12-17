@@ -1,6 +1,8 @@
-package creator.template
+package creator.template.type.di
 
-enum class Type {
+import creator.template.Template
+
+enum class TypeDICoreModule {
 
     ROOM_MODULE {
         override fun getTemplate(): Template = Template.RoomModule("RoomModule")

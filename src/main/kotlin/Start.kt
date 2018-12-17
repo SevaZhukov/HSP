@@ -43,12 +43,23 @@ class Start : AnAction() {
         val core = folder.createChildDirectory(folder, "core")
         createCoreDICoreScope(core)
         createCoreDICoreModule(core)
-        //TODO create AppComponent here
+        val destinationPath = event.getData(LangDataKeys.PSI_ELEMENT) as PsiDirectory
+        val classDirectory = destinationPath
+            .findSubdirectory("core")!!
+            .findSubdirectory("di")!!
+            .findSubdirectory("core")!!
+        classCreator.createDICoreAppComponent(classDirectory)
     }
 
     private fun createCoreDICoreScope(folder: VirtualFile) {
-        //TODO create scopes here
         folder.createChildDirectory(folder, "scope")
+        val destinationPath = event.getData(LangDataKeys.PSI_ELEMENT) as PsiDirectory
+        val classDirectory = destinationPath
+            .findSubdirectory("core")!!
+            .findSubdirectory("di")!!
+            .findSubdirectory("core")!!
+            .findSubdirectory("scope")!!
+        classCreator.createDICoreScope(classDirectory)
     }
 
     private fun createCoreDICoreModule(folder: VirtualFile) {
@@ -59,12 +70,17 @@ class Start : AnAction() {
             .findSubdirectory("di")!!
             .findSubdirectory("core")!!
             .findSubdirectory("module")!!
-        classCreator.createFile(classDirectory)
+        classCreator.createDICoreModule(classDirectory)
     }
 
     private fun createCoreDIHelper(folder: VirtualFile) {
-        val helper = folder.createChildDirectory(folder, "helper")
-        //TODO create helper here
+        folder.createChildDirectory(folder, "helper")
+        val destinationPath = event.getData(LangDataKeys.PSI_ELEMENT) as PsiDirectory
+        val classDirectory = destinationPath
+            .findSubdirectory("core")!!
+            .findSubdirectory("di")!!
+            .findSubdirectory("helper")!!
+        classCreator.createDICoreHelper(classDirectory)
     }
 
     private fun createCoreDISub(folder: VirtualFile) {
@@ -80,6 +96,7 @@ class Start : AnAction() {
     }
 
     private fun createApp(folder: VirtualFile) {
-        //TODO create App here
+        val destinationPath = event.getData(LangDataKeys.PSI_ELEMENT) as PsiDirectory
+        classCreator.createApp(destinationPath)
     }
 }
