@@ -6,20 +6,17 @@ import com.intellij.openapi.actionSystem.LangDataKeys
 import com.intellij.openapi.command.WriteCommandAction
 import com.intellij.openapi.vfs.VirtualFile
 import com.intellij.psi.PsiDirectory
-
-import javax.swing.JPanel
+import creator.Creator
 
 class Start : AnAction() {
 
-    lateinit var panel: JPanel
-
-    lateinit var classFileCreator: FileCreator
-    lateinit var event: AnActionEvent
+    lateinit var classCreator: Creator
+    private lateinit var event: AnActionEvent
 
     override fun actionPerformed(event: AnActionEvent) {
         this.event = event
         val project = event.project!!
-        classFileCreator = FileCreator(project)
+        classCreator = Creator(project)
         val file = DataKeys.VIRTUAL_FILE.getData(event.dataContext) ?: return
         val folder = if (file.isDirectory) file else file.parent
         WriteCommandAction.runWriteCommandAction(project) {
@@ -62,7 +59,7 @@ class Start : AnAction() {
             .findSubdirectory("di")!!
             .findSubdirectory("core")!!
             .findSubdirectory("module")!!
-        classFileCreator.createFile(classDirectory)
+        classCreator.createFile(classDirectory)
     }
 
     private fun createCoreDIHelper(folder: VirtualFile) {
