@@ -4,16 +4,10 @@ import com.intellij.openapi.actionSystem.AnActionEvent
 import com.intellij.openapi.actionSystem.DataKeys
 import com.intellij.openapi.actionSystem.LangDataKeys
 import com.intellij.openapi.command.WriteCommandAction
-import com.intellij.openapi.project.Project
+import com.intellij.openapi.ui.Messages
 import com.intellij.openapi.vfs.VirtualFile
 import com.intellij.psi.PsiDirectory
 import creator.Creator
-import javax.swing.JDialog
-import com.intellij.openapi.wm.impl.IdeFrameImpl
-import com.intellij.openapi.wm.WindowManager
-import com.intellij.openapi.wm.ex.WindowManagerEx
-import java.awt.Window
-import javax.swing.JFrame
 
 
 class Start : AnAction() {
@@ -21,26 +15,11 @@ class Start : AnAction() {
     lateinit var classCreator: Creator
     private lateinit var event: AnActionEvent
 
-    /*private fun getParentWindow(project: Project): Window? {
-        val windowManager = WindowManager.getInstance() as WindowManagerEx
-        var window = windowManager.suggestParentWindow(project)
-        if (window == null) {
-            val focusedWindow = windowManager.mostRecentFocusedWindow
-            if (focusedWindow is IdeFrameImpl) {
-                window = focusedWindow
-            }
-        }
-        return window
-    }*/
-
     override fun actionPerformed(event: AnActionEvent) {
         this.event = event
         val project = event.project!!
 
-        /*val frame = JFrame()
-        val dialog = JDialog(frame, "Lol", true)
-        frame.add(dialog)
-        getParentWindow(project)!!.add(frame)*/
+        val dialog = Messages.showMessageDialog("Я тут захерачил плагин чтобы не писать тонны шаблонного кода ручками :3 Так что если хочешь сделать быстрый старт, то жми ПОГНАЛИ", "Hackathon Starter Pack", null)
 
         classCreator = Creator(project)
         val file = DataKeys.VIRTUAL_FILE.getData(event.dataContext) ?: return
