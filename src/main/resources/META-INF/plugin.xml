@@ -1,12 +1,21 @@
 <idea-plugin>
     <id>memeplugin.memeplugin</id>
+    <version>1.0.0</version>
     <name>Hackathon Starter Pack</name>
     <vendor email="memebattlecompany@gmail.com" url="https://mems.fun/">MemeBattle</vendor>
 
-    <description>It will help you to create skeleton of Android application by Clean Architectre with using Dagger 2, Retrofit 2 and Room</description>
+    <description>It will help you to create skeleton of Android application by Clean Architectre with using Dagger 2,
+        Retrofit 2 and Room
+    </description>
+
+    <!-- please see http://www.jetbrains.org/intellij/sdk/docs/basics/getting_started/plugin_compatibility.html
+         on how to target different products -->
+    <!-- uncomment to enable plugin in all products
+    <depends>com.intellij.modules.lang</depends>
+    -->
 
     <extensions defaultExtensionNs="com.intellij">
-
+        <defaultProjectTypeProvider type="Android"/>
     </extensions>
 
     <actions>
@@ -17,7 +26,9 @@
             <action id="Start"
                     class="Start"
                     text="_Start"
-                    description="Start Plugin"/>
+                    description="Start"/>
         </group>
     </actions>
+    <idea-version since-build="141.0"/>
+    <depends>com.intellij.modules.lang</depends>
 </idea-plugin>
