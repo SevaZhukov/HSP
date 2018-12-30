@@ -20,4 +20,5 @@ sealed class Template(val name: String) {
     class BaseCallback(name: String) : Template(name)
     class MainThreadExecutor(name: String) : Template(name)
     class AppDatabase(name: String) : Template(name)
+    class Extensions(name: String) : Template(name)
 }

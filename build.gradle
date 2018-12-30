@@ -22,7 +22,7 @@ compileTestKotlin {
 }
 intellij {
     version '2018.3.1'
-    alternativeIdePath '/home/seva/android-studio-canary'
+    //alternativeIdePath '/home/seva/android-studio-canary'
     intellij.updateSinceUntilBuild false
 }
 patchPluginXml {

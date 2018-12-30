@@ -4,11 +4,9 @@ import com.intellij.openapi.actionSystem.AnActionEvent
 import com.intellij.openapi.actionSystem.DataKeys
 import com.intellij.openapi.actionSystem.LangDataKeys
 import com.intellij.openapi.command.WriteCommandAction
-import com.intellij.openapi.ui.Messages
 import com.intellij.openapi.vfs.VirtualFile
 import com.intellij.psi.PsiDirectory
 import creator.Creator
-
 
 class Start : AnAction() {
 
@@ -18,8 +16,6 @@ class Start : AnAction() {
     override fun actionPerformed(event: AnActionEvent) {
         this.event = event
         val project = event.project!!
-
-        val dialog = Messages.showMessageDialog("Я тут захерачил плагин чтобы не писать тонны шаблонного кода ручками :3 Так что если хочешь сделать быстрый старт, то жми ПОГНАЛИ", "Hackathon Starter Pack", null)
 
         classCreator = Creator(project)
         val file = DataKeys.VIRTUAL_FILE.getData(event.dataContext) ?: return
@@ -36,6 +32,16 @@ class Start : AnAction() {
         createCoreDI(core)
         createCoreDomain(core)
         createCoreData(core)
+        createCoreExtensions(core)
+    }
+
+    private fun createCoreExtensions(folder: VirtualFile) {
+        folder.createChildDirectory(folder, "extensions")
+        val destinationPath = event.getData(LangDataKeys.PSI_ELEMENT) as PsiDirectory
+        val classDirectory = destinationPath
+            .findSubdirectory("core")!!
+            .findSubdirectory("extensions")!!
+        classCreator.createExtensions(classDirectory)
     }
 
     private fun createCoreDI(folder: VirtualFile) {

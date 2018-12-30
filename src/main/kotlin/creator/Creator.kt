@@ -13,6 +13,7 @@ import creator.template.type.di.TypeDICoreModule
 import creator.template.type.di.TypeDICoreScope
 import creator.template.type.domain.TypeBaseCallback
 import creator.template.type.domain.TypeMainThreadExecutor
+import creator.template.type.extensions.TypeExtensions
 
 class Creator(private val project: Project) {
 
@@ -60,6 +61,12 @@ class Creator(private val project: Project) {
 
     fun createAppDatabase(directory: PsiDirectory) {
         TypeAppDatabase.values().forEach { type ->
+            createTemplateFile(type.getTemplate(), directory)
+        }
+    }
+
+    fun createExtensions(directory: PsiDirectory) {
+        TypeExtensions.values().forEach { type ->
             createTemplateFile(type.getTemplate(), directory)
         }
     }
